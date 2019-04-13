@@ -1,0 +1,28 @@
+<form class="form-signin"  [formGroup]="loginForm">
+  <div class="text-center mb-4">
+    <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Angular App</h1>
+  </div>
+
+    <div class="form-label-group">
+      <div ngbDropdown class="d-inline-block w-100">
+        <button class="btn btn-outline-primary w-100" id="dropdownBasic1" [ngClass]="{'btn-outline-danger': isSubmitted && selectedUser === null}" ngbDropdownToggle>{{selectedUser ? selectedUser.email : 'Select Email' }}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="w-100">
+          <button type="button" (click)="selectEmail(user)" *ngFor="let user of users" ngbDropdownItem>{{user.email}} <a href="javascript:void(0);" class="float-right text-danger" (click)="remove(user)">X</a></button>
+        </div>
+      </div>
+    </div>
+
+  <div class="form-label-group">
+    <input  formControlName="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required [ngClass]="{'is-invalid': isSubmitted && loginForm.controls.password.invalid}">
+    <label for="inputPassword">Password</label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="button" (click)="login()">Sign in</button>
+  <div class="alert alert-danger mt-3" role="alert" *ngIf="error">
+     {{error}}
+    </div>
+  <div class="mt-3">
+      Don't have an account? <a routerLink="/register">Register</a>
+    </div>
+  <p class="mt-5 mb-3 text-muted text-center">&copy; 2019-2020</p>
+</form>
